@@ -102,7 +102,7 @@ namespace AnalyzePj
                         {
                             MethodName = method.Name,
                             ReturnType = method.ReturnType.ToDisplayString(TypeFormat),
-                            ParameterTypes = requestParams.Select(p => p.Type.ToDisplayString(TypeFormat)).ToList(),
+                            Parameters = requestParams.Select(p => (p.Name, p.Type.ToDisplayString(TypeFormat))).ToList(),
                             EnumParams = enumItems
                         });
                     }
@@ -145,7 +145,7 @@ namespace AnalyzePj
                         if (!ctrlResult.Actions.Any(x =>
                                 string.Equals(x.MethodName, a.MethodName, StringComparison.Ordinal) &&
                                 string.Equals(x.ReturnType, a.ReturnType, StringComparison.Ordinal) &&
-                                SameList(x.ParameterTypes, a.ParameterTypes)))
+                                SameList(x.Parameters, a.Parameters)))
                         {
                             ctrlResult.Actions.Add(a);
                         }
@@ -206,7 +206,7 @@ namespace AnalyzePj
         {
             public string MethodName { get; set; }
             public string ReturnType { get; set; }
-            public List<string> ParameterTypes { get; set; }
+            public List<(string name, string type)> Parameters { get; set; }
 
             /// <summary>
             /// リクエストパラメータに含まれる enum の型 と、対応する「enum型パラメータ（プロパティ）名」
@@ -363,14 +363,14 @@ namespace AnalyzePj
         // ----------------------------
         // ユーティリティ
         // ----------------------------
-        private static bool SameList(List<string> a, List<string> b)
+        private static bool SameList(List<(string, string)> a, List<(string, string)> b)
         {
             if (ReferenceEquals(a, b)) return true;
             if (a == null || b == null) return false;
             if (a.Count != b.Count) return false;
             for (int i = 0; i < a.Count; i++)
             {
-                if (!string.Equals(a[i], b[i], StringComparison.Ordinal)) return false;
+                if (!string.Equals(a[i].Item1, b[i].Item1, StringComparison.Ordinal) || !string.Equals(a[i].Item2, b[i].Item2, StringComparison.Ordinal)) return false;
             }
             return true;
         }

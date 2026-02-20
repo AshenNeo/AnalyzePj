@@ -69,7 +69,11 @@ namespace AnalyzePj
 
                             if (isShowActionParamType)
                             {
-                                tbResult.AppendText($"\t\t\t {a.ParameterTypes}\r\n");
+                                foreach(var p in a.Parameters)
+                                {
+                                    tbResult.AppendText($"\t\t\t{p.type}\t{p.name}\r\n");
+                                }
+
                                 foreach (var p in a.EnumParams)
                                 {
                                     tbResult.AppendText(
