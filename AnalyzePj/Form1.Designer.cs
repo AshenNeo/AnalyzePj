@@ -35,6 +35,8 @@
             tbResult = new TextBox();
             cbShowActionParamType = new CheckBox();
             cbShowActionReturnType = new CheckBox();
+            label2 = new Label();
+            tbLog = new TextBox();
             SuspendLayout();
             // 
             // label1
@@ -80,7 +82,9 @@
             tbResult.Location = new Point(12, 179);
             tbResult.Multiline = true;
             tbResult.Name = "tbResult";
-            tbResult.Size = new Size(1506, 505);
+            tbResult.ReadOnly = true;
+            tbResult.ScrollBars = ScrollBars.Both;
+            tbResult.Size = new Size(1506, 430);
             tbResult.TabIndex = 6;
             // 
             // cbShowActionParamType
@@ -103,11 +107,33 @@
             cbShowActionReturnType.Text = "リターン詳細を表示";
             cbShowActionReturnType.UseVisualStyleBackColor = true;
             // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(12, 643);
+            label2.Name = "label2";
+            label2.Size = new Size(51, 25);
+            label2.TabIndex = 9;
+            label2.Text = "Log :";
+            // 
+            // tbLog
+            // 
+            tbLog.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            tbLog.Location = new Point(12, 671);
+            tbLog.Multiline = true;
+            tbLog.Name = "tbLog";
+            tbLog.ReadOnly = true;
+            tbLog.ScrollBars = ScrollBars.Both;
+            tbLog.Size = new Size(1506, 153);
+            tbLog.TabIndex = 10;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1525, 696);
+            ClientSize = new Size(1525, 836);
+            Controls.Add(tbLog);
+            Controls.Add(label2);
             Controls.Add(cbShowActionReturnType);
             Controls.Add(cbShowActionParamType);
             Controls.Add(tbResult);
@@ -130,5 +156,7 @@
         private TextBox tbResult;
         private CheckBox cbShowActionParamType;
         private CheckBox cbShowActionReturnType;
+        private Label label2;
+        private TextBox tbLog;
     }
 }

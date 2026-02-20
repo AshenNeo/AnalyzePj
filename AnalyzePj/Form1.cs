@@ -29,10 +29,11 @@ namespace AnalyzePj
             var isShowActionReturnType = cbShowActionReturnType.Checked;
 
             tbResult.Clear();
+            tbLog.Clear();
 
             var progress = new Progress<string>(msg =>
             {
-                tbResult.AppendText(msg + Environment.NewLine);
+                tbLog.AppendText(msg + Environment.NewLine);
             });
 
             try
@@ -40,7 +41,7 @@ namespace AnalyzePj
                 using var analyzer = new Analyzer(progress);
                 var solution = await analyzer.LoadSolutionAsync(targetSolutionPath);
 
-                tbResult.AppendText("OK: solution loaded." + Environment.NewLine + Environment.NewLine);
+                tbLog.AppendText("OK: solution loaded." + Environment.NewLine + Environment.NewLine);
 
                 var actionAnalyzer = new AnalyzeActionController(solution, progress);
                 var hits = await actionAnalyzer.FindEnumRequestParam();
